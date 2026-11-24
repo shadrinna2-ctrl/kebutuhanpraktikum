@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10132b">
+<title>PinjamAlat — Sewa & Pinjam Perlengkapan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#10132b;--muted:#747992;--paper:#f6f7fb;--white:#fff;--purple:#7865ff;--pink:#ff6da9;--cyan:#64d8e8;--line:#e8e9f1;--shadow:0 18px 55px #171a3b12}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif}button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{text-decoration:none;color:inherit}.wrap{width:min(1180px,92%);margin:auto}
+.topbar{background:#11142d;color:#c8cbe0;font-size:12px;padding:9px 0}.topbar .wrap{display:flex;justify-content:space-between;gap:12px}
+nav{position:sticky;top:0;z-index:20;background:#ffffffed;backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:11px;font:700 21px "Space Grotesk"}.brandmark{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,var(--purple),var(--pink));display:grid;place-items:center;color:white;box-shadow:0 8px 20px #7865ff45}.navlinks{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:700;color:#555a75}.navlinks a:hover{color:var(--purple)}.navright{display:flex;gap:10px;align-items:center}.iconbtn,.menu{border:1px solid var(--line);background:white;border-radius:13px;padding:11px 14px;font-weight:800}.menu{display:none}.btn{border:0;border-radius:13px;padding:13px 18px;font-weight:800;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-2px)}.primary{color:#fff;background:linear-gradient(110deg,#7865ff,#a46bff 50%,#ff6da9);box-shadow:0 10px 25px #7865ff35}.darkbtn{background:var(--ink);color:white}.softbtn{background:#efedff;color:#6554e8}.whitebtn{background:white;color:var(--ink)}
+.hero{padding:60px 0 70px;background:radial-gradient(circle at 75% 15%,#b7aaff66,transparent 28%),radial-gradient(circle at 8% 90%,#ffb9d466,transparent 26%),#f4f2ff;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:50px}.eyebrow{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7564ee;font-weight:800;display:inline-flex;gap:8px;align-items:center}.eyebrow:before{content:"";width:24px;height:2px;background:var(--pink)}h1,h2,h3,p{margin-top:0}h1{font:700 clamp(42px,6vw,68px)/1.04 "Space Grotesk";letter-spacing:-2.5px;margin:18px 0}.hero p{max-width:510px;color:#686d88;line-height:1.8;font-size:16px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:27px 0}.trust{display:flex;gap:18px;flex-wrap:wrap;color:#696e87;font-size:12px;font-weight:700}.trust span{display:flex;align-items:center;gap:6px}.hero-visual{position:relative;min-height:420px;display:grid;place-items:center}.orb{position:absolute;width:360px;height:360px;border-radius:50%;background:linear-gradient(135deg,#d8d1ff,#ffd6e8);filter:blur(1px)}.hero-photo{position:relative;width:min(470px,100%);height:340px;object-fit:cover;border-radius:28px;box-shadow:0 28px 70px #28204a2b;transform:rotate(2deg)}.floatnote{position:absolute;bottom:10px;left:0;background:white;border:1px solid #ffffff;border-radius:18px;padding:15px 18px;box-shadow:var(--shadow);font-size:13px;font-weight:800}.floatnote small{display:block;color:var(--muted);font-weight:500;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:-25px;position:relative}.stat{background:white;border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow)}.stat b{font:700 27px "Space Grotesk";display:block}.stat span{color:var(--muted);font-size:12px}
+section{padding:76px 0;scroll-margin-top:90px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:28px}.section-head h2{font:700 clamp(27px,4vw,38px) "Space Grotesk";letter-spacing:-1.2px;margin:9px 0}.section-head p{color:var(--muted);font-size:14px;line-height:1.7;margin:0}.catalog-tools{display:flex;gap:12px;align-items:center;margin:22px 0 17px}.search{flex:1;position:relative}.search input{width:100%;border:1px solid var(--line);border-radius:14px;padding:15px 17px 15px 44px;background:white;outline:none}.search:before{content:"⌕";position:absolute;left:16px;top:8px;font-size:25px;color:#858aa2}.search input:focus{border-color:#a69aff;box-shadow:0 0 0 4px #7865ff14}.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}.filter{border:1px solid var(--line);background:white;color:#696e87;border-radius:30px;padding:9px 15px;font-size:12px;font-weight:800}.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:white;border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:.25s;box-shadow:0 8px 25px #171a3b08}.product:hover{transform:translateY(-6px);box-shadow:var(--shadow)}.product img{width:100%;height:175px;object-fit:cover;background:#eee}.product-body{padding:16px}.tag{display:inline-block;background:#f0edff;color:#6d5bea;border-radius:30px;padding:6px 9px;font-size:10px;font-weight:800}.product h3{font-size:16px;margin:11px 0 5px}.product p{color:var(--muted);font-size:12px;margin:0}.price{font:700 17px "Space Grotesk";margin:14px 0;color:#6353e8}.price small{font:500 11px "DM Sans";color:var(--muted)}.product-actions{display:flex;gap:8px}.product-actions button{flex:1;padding:10px 8px;font-size:11px}
+.preview-section{background:#11142d;color:white;position:relative;overflow:hidden}.preview-section:before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:#7865ff22;filter:blur(50px);top:-240px;right:-100px}.preview-grid{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:center}.preview-copy .eyebrow{color:#b9b0ff}.preview-copy h2{font:700 clamp(30px,4vw,44px)/1.1 "Space Grotesk";margin:14px 0}.preview-copy p{color:#b9bdd4;line-height:1.8;font-size:14px}.preview-copy ul{list-style:none;padding:0;color:#dfe0ed;font-size:13px;line-height:2.4}.preview-copy li:before{content:"✦";color:#ff83b4;margin-right:10px}.viewer{background:linear-gradient(145deg,#24294e,#171a35);border:1px solid #ffffff1a;border-radius:26px;padding:16px;box-shadow:0 25px 65px #0005}.viewer-top{display:flex;align-items:center;justify-content:space-between;padding:3px 4px 12px;color:#c5c8df;font-size:12px}.viewer-top strong{color:white}.viewer-stage{height:340px;border-radius:18px;background:radial-gradient(circle at 50% 42%,#55518c,#24284b 57%,#1a1d39);position:relative;overflow:hidden;display:grid;place-items:center;touch-action:none;cursor:grab}.viewer-stage:active{cursor:grabbing}.viewer-stage canvas{width:100%;height:100%;display:block}.viewer-help{font-size:11px;color:#9da2c1;text-align:center;padding:12px 0 3px}.viewer-controls{display:flex;justify-content:center;gap:8px;margin-top:8px}.viewer-controls button{background:#ffffff12;border:1px solid #ffffff20;color:white;border-radius:10px;padding:8px 13px;font-size:11px;font-weight:700}
+.how{background:#f0f1fa}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:28px}.step{background:white;border:1px solid var(--line);border-radius:20px;padding:25px}.stepnum{width:42px;height:42px;border-radius:13px;background:#efedff;color:#6857ed;display:grid;place-items:center;font:700 15px "Space Grotesk"}.step h3{margin:18px 0 8px;font-size:16px}.step p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
+.cart-layout{display:grid;grid-template-columns:1.4fr .6fr;gap:20px;align-items:start}.cartbox,.summary{background:white;border:1px solid var(--line);border-radius:20px;padding:22px}.cartline{display:grid;grid-template-columns:1fr auto auto;gap:15px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}.cartline:last-child{border:0}.cartline small{display:block;color:var(--muted);margin-top:4px}.qty{display:flex;align-items:center;gap:8px}.qty button{border:1px solid var(--line);background:white;border-radius:9px;width:29px;height:29px}.remove{border:0;background:#fff0f3;color:#df4e7e;border-radius:9px;padding:8px}.summary h3{margin-bottom:18px}.sumrow{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin:13px 0}.sumrow.total{border-top:1px solid var(--line);padding-top:16px;color:var(--ink);font-weight:800;font-size:17px}.summary .btn{width:100%;margin-top:8px}
+.contact{background:linear-gradient(120deg,#7865ff,#9b69ef 48%,#ff77aa);color:white;border-radius:26px;padding:40px;display:flex;justify-content:space-between;align-items:center;gap:25px}.contact h2{font:700 30px "Space Grotesk";margin-bottom:8px}.contact p{color:#f0eaff;margin:0;font-size:14px}.contact-actions{display:flex;gap:10px;flex-wrap:wrap}
+footer{background:#11142d;color:white;padding:36px 0 25px}.footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer p{color:#9da2bd;font-size:12px}.footerlinks{display:flex;gap:20px;color:#c6c8dc;font-size:12px;align-items:center}.copyright{border-top:1px solid #ffffff1c;margin-top:24px;padding-top:18px;color:#858ba9;font-size:11px}
+.modal{position:fixed;inset:0;background:#0d1029b8;z-index:50;display:none;place-items:center;padding:18px}.modal.show{display:grid}.modalbox{width:min(540px,100%);max-height:90vh;overflow:auto;background:white;border-radius:22px;padding:24px;position:relative}.close{position:absolute;right:15px;top:12px;border:0;background:#f1f1f7;border-radius:50%;width:34px;height:34px;font-size:20px}.modalbox img{width:100%;height:210px;object-fit:cover;border-radius:15px;margin-bottom:14px}.field{margin:13px 0}.field label{display:block;font-weight:800;font-size:12px;margin-bottom:7px}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;outline:none}.field textarea{min-height:70px;resize:vertical}.history{display:grid;gap:12px}.historyitem{background:white;border:1px solid var(--line);border-radius:15px;padding:16px}.historyitem small{color:var(--muted)}.empty{color:var(--muted);text-align:center;padding:30px;background:#fafaff;border-radius:15px;font-size:13px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#171a35;color:white;border-radius:12px;padding:12px 18px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:80}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.hero-grid,.preview-grid{grid-template-columns:1fr}.hero-visual{min-height:340px}.hero-photo{height:300px}.products{grid-template-columns:repeat(2,1fr)}.cart-layout{grid-template-columns:1fr}.navlinks{gap:15px}.preview-copy{max-width:620px}}
+@media(max-width:650px){.topbar .wrap span:last-child{display:none}.nav{height:66px}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;background:white;padding:20px;flex-direction:column;border-bottom:1px solid var(--line)}.navlinks.open{display:flex}.menu{display:block}.navright .primary{display:none}.hero{padding:45px 0}.hero-grid{gap:20px}.hero-visual{min-height:260px}.orb{width:250px;height:250px}.hero-photo{height:230px}.floatnote{left:0;bottom:-5px}.stats{grid-template-columns:1fr;margin-top:16px}.stat{padding:15px}.stat b{font-size:22px}.section-head{display:block}.products{grid-template-columns:1fr 1fr;gap:11px}.product img{height:130px}.product-body{padding:12px}.product h3{font-size:14px}.product-actions{flex-direction:column}.catalog-tools{margin-top:15px}.viewer-stage{height:280px}.steps{grid-template-columns:1fr}.contact{padding:27px;display:block}.contact-actions{margin-top:20px}.cartline{grid-template-columns:1fr auto}.cartline>.remove{grid-column:2}.footerlinks{flex-wrap:wrap}.section{padding:55px 0}}
+@media(max-width:390px){.products{grid-template-columns:1fr}.product img{height:180px}.hero h1{font-size:42px}}
+
+/* ADMIN DASHBOARD */
+.admin-login{position:fixed;inset:0;background:#0d1029dc;z-index:100;display:none;place-items:center;padding:18px}
+.admin-login.show{display:grid}.admin-login-box{width:min(430px,100%);background:#fff;border-radius:24px;padding:30px;box-shadow:0 25px 80px #0005;position:relative}
+.admin-login-box h2{font:700 27px "Space Grotesk";margin:8px 0}.admin-login-box p{font-size:13px;color:var(--muted);line-height:1.6}
+.admin-login-box input,.admin-panel input,.admin-panel select,.admin-panel textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:#fff;outline:none}
+.admin-panel{display:none;position:fixed;inset:0;z-index:90;background:#f4f5fb;overflow:auto}
+.admin-panel.show{display:block}.admin-shell{max-width:1440px;margin:auto;min-height:100vh;display:grid;grid-template-columns:245px 1fr}
+.admin-side{background:#11142d;color:#fff;padding:25px 16px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.admin-brand{font:700 20px "Space Grotesk";padding:5px 10px 28px;display:flex;gap:10px;align-items:center}
+.admin-side small{color:#969bb9;font-size:10px;letter-spacing:1.5px;font-weight:800;padding:12px}
+.admin-nav{display:grid;gap:7px}.admin-nav button{border:0;background:transparent;color:#c5c8dc;text-align:left;padding:13px 14px;border-radius:11px;font-weight:700;font-size:13px}
+.admin-nav button.active,.admin-nav button:hover{background:#ffffff17;color:#fff}
+.admin-side-bottom{margin-top:auto;display:grid;gap:9px}.admin-side-bottom button{border:1px solid #ffffff24;background:#ffffff10;color:#fff;border-radius:11px;padding:12px;font-weight:700}
+.admin-main{padding:28px;min-width:0}.admin-top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
+.admin-top h1{font:700 28px "Space Grotesk";margin:0 0 5px}.admin-top p{color:var(--muted);font-size:13px;margin:0}
+.admin-user{background:#fff;border:1px solid var(--line);padding:10px 14px;border-radius:13px;font-size:12px;font-weight:800}
+.admin-view{display:none}.admin-view.active{display:block}
+.admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.admin-stat{background:#fff;border:1px solid var(--line);border-radius:17px;padding:19px}
+.admin-stat span{font-size:11px;color:var(--muted);font-weight:700}.admin-stat b{display:block;font:700 25px "Space Grotesk";margin-top:9px}
+.admin-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:20px;margin-bottom:18px;min-width:0}
+.admin-card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.admin-card h3{font:700 17px "Space Grotesk";margin:0}
+.admin-table-wrap{overflow:auto}table.admin-table{width:100%;border-collapse:collapse;min-width:650px;font-size:12px}
+.admin-table th{text-align:left;color:#777c94;background:#f8f8fc;padding:12px 10px}
+.admin-table td{padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+.admin-table img{width:44px;height:40px;object-fit:cover;border-radius:8px}
+.admin-pill{display:inline-block;border-radius:30px;padding:6px 9px;font-size:10px;font-weight:800;background:#f0edff;color:#6755e9}
+.admin-pill.pending{background:#fff4dc;color:#a36c00}.admin-pill.confirmed{background:#e8f5ff;color:#2873b5}.admin-pill.ongoing{background:#f0edff;color:#6755e9}.admin-pill.completed{background:#e6f8ef;color:#16834b}.admin-pill.cancelled{background:#fff0f2;color:#d34c70}
+.admin-actions{display:flex;gap:6px;flex-wrap:wrap}.admin-actions button,.admin-small-btn{border:0;border-radius:8px;padding:8px 10px;font-size:11px;font-weight:800;background:#efedff;color:#6654e8}
+.admin-actions .danger{background:#fff0f2;color:#d34c70}
+.admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.admin-field label{display:block;font-size:11px;font-weight:800;margin-bottom:7px}
+.admin-field.full{grid-column:1/-1}.admin-field textarea{min-height:80px}
+.admin-form-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:16px}
+.admin-empty{text-align:center;padding:28px;color:var(--muted);font-size:13px}
+.admin-chart{display:grid;gap:12px}.admin-bar-row{display:grid;grid-template-columns:110px 1fr 90px;gap:10px;align-items:center;font-size:11px}.admin-bar{height:10px;background:#efedff;border-radius:20px;overflow:hidden}.admin-bar i{height:100%;display:block;background:linear-gradient(90deg,#7865ff,#ff6da9);border-radius:20px}
+.admin-notice{background:#fff8e8;border:1px solid #f3dfae;border-radius:12px;padding:12px;font-size:11px;color:#80621d;line-height:1.6;margin-top:14px}
+@media(max-width:900px){.admin-shell{grid-template-columns:1fr}.admin-side{position:relative;height:auto;padding:13px}.admin-brand{padding:5px 8px 12px}.admin-side small{display:none}.admin-nav{display:flex;overflow:auto}.admin-nav button{white-space:nowrap}.admin-side-bottom{position:absolute;right:15px;top:12px;margin:0}.admin-side-bottom button{padding:9px}.admin-stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.admin-main{padding:17px}.admin-top{align-items:flex-start;flex-direction:column}.admin-stats{gap:9px}.admin-stat{padding:14px}.admin-stat b{font-size:20px}.admin-form-grid{grid-template-columns:1fr}.admin-field.full{grid-column:auto}.admin-login-box{padding:23px}}
+
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap"><span>✦ Praktis, hemat, dan mudah untuk kebutuhan kampus</span><span>Butuh bantuan? Hubungi admin kapan saja</span></div></div>
+<nav><div class="wrap nav">
+  <a class="brand" href="#home"><span class="brandmark">P</span>PinjamAlat</a>
+  <div class="navlinks" id="navlinks"><a href="#home">Beranda</a><a href="#katalog">Katalog</a><a href="#3d">Preview 3D</a><a href="#cara">Cara Pinjam</a><a href="#keranjang">Keranjang</a><a href="#kontak">Kontak</a></div>
+  <div class="navright"><button class="btn softbtn" onclick="openAdminLogin()">Admin</button><a class="btn primary" href="#katalog">Cari Peralatan ↗</a><button class="menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button></div>
+</div></nav>
+<header class="hero" id="home"><div class="wrap hero-grid">
+  <div><span class="eyebrow">Platform peminjaman perlengkapan</span><h1>Semua alat yang kamu butuhkan, <span style="color:#7865ff">ada di sini.</span></h1><p>Temukan perlengkapan untuk kuliah, tugas, organisasi, dan acara kampus. Pilih alat, masukkan ke keranjang, lalu kirim detail pesanan langsung ke WhatsApp.</p>
+    <div class="hero-actions"><a class="btn primary" href="#katalog">Jelajahi Katalog <span>→</span></a><a class="btn whitebtn" href="#3d">Lihat Preview 3D</a></div>
+    <div class="trust"><span>✦ Pilihan perlengkapan</span><span>✓ Pesan lewat WhatsApp</span><span>♡ Mudah digunakan</span></div>
+  </div>
+  <div class="hero-visual"><div class="orb"></div><img class="hero-photo" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1000&q=85" alt="Peralatan teknologi"><div class="floatnote">🎒 Satu tempat, banyak kebutuhan<small>Pilih alat sesuai kebutuhanmu</small></div></div>
+</div></header>
+<div class="wrap stats"><div class="stat"><b>08+</b><span>Pilihan perlengkapan</span></div><div class="stat"><b>03</b><span>Langkah peminjaman</span></div><div class="stat"><b>24/7</b><span>Katalog bisa diakses kapan saja</span></div></div>
+<section id="katalog"><div class="wrap"><div class="section-head"><div><span class="eyebrow">Katalog pilihan</span><h2>Cari alat yang kamu perlukan</h2><p>Pilih produk untuk melihat detail, harga, dan menambahkannya ke keranjang.</p></div></div>
+  <div class="catalog-tools"><div class="search"><input id="search" type="search" placeholder="Cari alat komputer, jaringan, elektronika, kamera..." oninput="renderProducts()"></div></div><div class="filters" id="filters"></div><div class="products" id="products"></div>
+</div></section>
+<section class="preview-section" id="3d"><div class="wrap preview-grid">
+  <div class="preview-copy"><span class="eyebrow">Coba langsung</span><h2>Lihat barang dari segala sisi dalam 3D.</h2><p>Pilih salah satu dari 28 alat di katalog, lalu lihat model 3D-nya di sini. Putar objek dengan menggeser mouse atau jari, dan gunakan tombol untuk memutar otomatis atau mengembalikan posisi.</p><ul><li>Model 3D interaktif</li><li>Bisa diputar 360 derajat</li><li>Pilih produk langsung dari daftar</li></ul><select id="modelSelect" onchange="selectModel(this.value)" style="padding:12px 14px;border-radius:12px;border:1px solid #ffffff30;background:#25294d;color:white;width:min(280px,100%)"></select></div>
+  <div class="viewer"><div class="viewer-top"><strong id="modelName">Kamera DSLR</strong><span>INTERACTIVE 3D VIEW</span></div><div class="viewer-stage" id="stage"><canvas id="threeCanvas"></canvas></div><div class="viewer-help">↔ Geser untuk memutar objek · Scroll untuk zoom</div><div class="viewer-controls"><button onclick="reset3D()">⟲ Reset</button><button onclick="toggleSpin()" id="spinBtn">Ⅱ Pause</button><button onclick="zoom3D(1.15)">＋ Zoom</button><button onclick="zoom3D(.87)">－ Zoom</button></div></div>
+</div></section>
+<section class="how" id="cara"><div class="wrap"><div class="section-head"><div><span class="eyebrow">Gampang banget</span><h2>Cara peminjaman</h2><p>Cukup ikuti tiga langkah berikut sampai pesanan terkirim.</p></div></div><div class="steps"><div class="step"><div class="stepnum">01</div><h3>Pilih perlengkapan</h3><p>Cari barang melalui katalog dan buka detail untuk melihat informasi serta harga sewanya.</p></div><div class="step"><div class="stepnum">02</div><h3>Atur keranjang</h3><p>Masukkan barang yang dibutuhkan, atur jumlahnya, lalu isi tanggal dan lama peminjaman.</p></div><div class="step"><div class="stepnum">03</div><h3>Kirim pesanan</h3><p>Tekan checkout. Ringkasan pesanan akan terbuka di WhatsApp admin untuk dikonfirmasi.</p></div></div></div></section>
+<section id="keranjang"><div class="wrap"><div class="section-head"><div><span class="eyebrow">Daftar pilihanmu</span><h2>Keranjang peminjaman</h2><p>Periksa barang sebelum mengirim permintaan peminjaman.</p></div></div><div class="cart-layout"><div class="cartbox" id="cartItems"></div><div class="summary"><h3>Ringkasan pesanan</h3><div class="sumrow"><span>Jumlah jenis barang</span><b id="itemCount">0</b></div><div class="sumrow"><span>Subtotal per hari</span><b id="subtotal">Rp0</b></div><div class="sumrow total"><span>Estimasi total</span><b id="grand">Rp0</b></div><button class="btn primary" onclick="checkout()">Lanjutkan Pesanan →</button><button class="btn softbtn" style="width:100%;margin-top:9px" onclick="clearCart()">Kosongkan keranjang</button><small style="display:block;color:var(--muted);line-height:1.5;margin-top:12px">* Total akhir dan ketersediaan barang akan dikonfirmasi admin melalui WhatsApp.</small></div></div></div></section>
+<section style="padding-top:0" id="riwayat"><div class="wrap"><div class="section-head"><div><span class="eyebrow">Aktivitas</span><h2>Riwayat pesanan</h2><p>Riwayat pesanan yang dibuat dari browser ini.</p></div></div><div class="history" id="history"></div></div></section>
+<section id="kontak"><div class="wrap"><div class="contact"><div><h2>Ada yang mau ditanyakan?</h2><p>Hubungi admin untuk cek ketersediaan barang dan informasi peminjaman.</p></div><div class="contact-actions"><a class="btn whitebtn" href="https://wa.me/6282164462480" target="_blank" rel="noopener">WhatsApp Admin ↗</a><a class="btn darkbtn" href="https://www.instagram.com/shadrinna_/" target="_blank" rel="noopener">Instagram ↗</a></div></div></div></section>
+<footer><div class="wrap"><div class="footer"><div><a class="brand" href="#home" style="color:white"><span class="brandmark">P</span>PinjamAlat</a><p style="margin-top:12px">Pinjam lebih mudah, aktivitas lebih lancar.</p></div><div class="footerlinks"><a href="#katalog">Katalog</a><a href="#cara">Cara Pinjam</a><a href="https://wa.me/6282164462480">WhatsApp</a><a href="https://instagram.com/shadrinna_/">Instagram</a></div></div><div class="copyright">© 2026 PinjamAlat. Semua hak dilindungi.</div></div></footer>
+<div class="modal" id="detailModal" onclick="if(event.target===this)closeModal()"><div class="modalbox"><button class="close" onclick="closeModal()">×</button><div id="detail"></div></div></div>
+<div class="modal" id="checkoutModal" onclick="if(event.target===this)closeCheckout()"><div class="modalbox"><button class="close" onclick="closeCheckout()">×</button><h2 style="font:700 25px 'Space Grotesk'">Lengkapi data peminjaman</h2><p style="color:var(--muted);font-size:13px">Isi data berikut agar admin bisa menghubungimu.</p><form id="orderForm"><div class="field"><label>Nama lengkap</label><input id="custName" required placeholder="Nama peminjam"></div><div class="field"><label>Nomor WhatsApp kamu</label><input id="custPhone" type="tel" required placeholder="08xxxxxxxxxx"></div><div class="field"><label>Tanggal mulai pinjam</label><input id="borrowDate" type="date" required></div><div class="field"><label>Lama peminjaman (hari)</label><input id="borrowDays" type="number" min="1" value="1" required></div><div class="field"><label>Catatan tambahan</label><textarea id="note" placeholder="Contoh: untuk kegiatan kampus..."></textarea></div><button class="btn primary" type="submit" style="width:100%">Kirim Pesanan ke WhatsApp ↗</button></form></div></div>
+
+<div class="admin-login" id="adminLogin" onclick="if(event.target===this)closeAdminLogin()">
+ <div class="admin-login-box">
+  <button class="close" onclick="closeAdminLogin()">×</button>
+  <div class="brand"><span class="brandmark">P</span>PinjamAlat</div>
+  <span class="eyebrow" style="margin-top:22px">Area khusus pengelola</span>
+  <h2>Login Admin</h2>
+  <p>Masuk untuk mengelola barang, stok, pesanan, pelanggan, dan laporan penyewaan.</p>
+  <form id="adminLoginForm">
+   <div class="field"><label>Username</label><input id="adminUsername" autocomplete="username" required placeholder="Masukkan username"></div>
+   <div class="field"><label>Password</label><input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Masukkan password"></div>
+   <p id="adminLoginError" style="color:#d34c70;display:none">Username atau password salah.</p>
+   <button class="btn primary" type="submit" style="width:100%">Masuk Dashboard →</button>
+  </form>
+  <div class="admin-notice">Akun awal demo: <b>admin</b> / <b>PinjamAlat2026!</b>. Segera ubah password. Login versi file HTML ini adalah demo lokal, bukan autentikasi aman untuk website publik.</div>
+ </div>
+</div>
+<div class="admin-panel" id="adminPanel">
+ <div class="admin-shell">
+  <aside class="admin-side">
+   <div class="admin-brand"><span class="brandmark">P</span>PinjamAlat</div>
+   <small>MENU PENGELOLA</small>
+   <div class="admin-nav">
+    <button class="active" data-view="overview" onclick="adminView('overview',this)">▦ &nbsp; Dashboard</button>
+    <button data-view="products" onclick="adminView('products',this)">▣ &nbsp; Data Barang</button>
+    <button data-view="orders" onclick="adminView('orders',this)">▤ &nbsp; Pesanan</button>
+    <button data-view="customers" onclick="adminView('customers',this)">♙ &nbsp; Pelanggan</button>
+    <button data-view="reports" onclick="adminView('reports',this)">▥ &nbsp; Laporan</button>
+    <button data-view="settings" onclick="adminView('settings',this)">⚙ &nbsp; Pengaturan</button>
+   </div>
+   <div class="admin-side-bottom">
+    <button onclick="closeAdminPanel()">← Kembali ke Website</button>
+    <button onclick="adminLogout()">Keluar Akun</button>
+   </div>
+  </aside>
+  <main class="admin-main">
+   <div class="admin-top"><div><h1 id="adminPageTitle">Dashboard</h1><p>Kelola operasional peminjaman PinjamAlat.</p></div><div class="admin-user">● Admin: <span id="adminUserLabel">admin</span></div></div>
+   <section class="admin-view active" id="admin-overview">
+    <div class="admin-stats">
+     <div class="admin-stat"><span>Total Barang Aktif</span><b id="statProducts">0</b></div>
+     <div class="admin-stat"><span>Total Pesanan</span><b id="statOrders">0</b></div>
+     <div class="admin-stat"><span>Menunggu Konfirmasi</span><b id="statPending">0</b></div>
+     <div class="admin-stat"><span>Estimasi Pendapatan Selesai</span><b id="statRevenue">Rp0</b></div>
+    </div>
+    <div class="admin-card"><div class="admin-card-head"><h3>Pesanan Terbaru</h3><button class="admin-small-btn" onclick="adminView('orders',document.querySelector('[data-view=orders]'))">Lihat semua</button></div><div id="overviewOrders"></div></div>
+    <div class="admin-card"><div class="admin-card-head"><h3>Ringkasan Stok Barang</h3></div><div id="stockSummary" class="admin-chart"></div></div>
+   </section>
+   <section class="admin-view" id="admin-products">
+    <div class="admin-card">
+     <div class="admin-card-head"><h3>Daftar Barang</h3><button class="btn primary" onclick="showProductForm()">+ Tambah Barang</button></div>
+     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Barang</th><th>Kategori</th><th>Harga Sewa/Hari</th><th>Harga Pengadaan</th><th>Stok</th><th>Kondisi</th><th>Aksi</th></tr></thead><tbody id="adminProductRows"></tbody></table></div>
+    </div>
+    <div class="admin-card" id="productEditor" style="display:none">
+     <div class="admin-card-head"><h3 id="productEditorTitle">Tambah Barang</h3></div>
+     <form id="adminProductForm"><input type="hidden" id="editProductId">
+      <div class="admin-form-grid">
+       <div class="admin-field"><label>Nama Barang</label><input id="pName" required></div>
+       <div class="admin-field"><label>Kategori</label><input id="pCategory" required placeholder="Contoh: Elektronik"></div>
+       <div class="admin-field"><label>Harga Sewa per Hari (Rp)</label><input id="pPrice" type="number" min="0" required></div>
+       <div class="admin-field"><label>Kisaran Harga Pengadaan (opsional)</label><input id="pPurchaseRange" placeholder="Contoh: Rp15–50 juta"></div>
+       <div class="admin-field"><label>Jumlah Stok</label><input id="pStock" type="number" min="0" value="1" required></div>
+       <div class="admin-field"><label>Kondisi</label><select id="pCondition"><option>Baik</option><option>Sangat Baik</option><option>Perlu Perawatan</option></select></div>
+       <div class="admin-field"><label>URL Foto Barang</label><input id="pImage" type="url" placeholder="https://..."></div>
+       <div class="admin-field full"><label>Deskripsi</label><textarea id="pDesc"></textarea></div>
+      </div>
+      <div class="admin-form-actions"><button type="button" class="btn softbtn" onclick="hideProductForm()">Batal</button><button class="btn primary" type="submit">Simpan Barang</button></div>
+     </form>
+    </div>
+   </section>
+   <section class="admin-view" id="admin-orders">
+    <div class="admin-card"><div class="admin-card-head"><h3>Semua Pesanan</h3><input id="orderSearch" style="max-width:260px" placeholder="Cari nama / nomor pesanan" oninput="renderAdminOrders()"></div>
+     <div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Nomor</th><th>Pelanggan</th><th>Tanggal</th><th>Barang</th><th>Total</th><th>Status</th><th>Ubah Status</th></tr></thead><tbody id="adminOrderRows"></tbody></table></div>
+    </div>
+   </section>
+   <section class="admin-view" id="admin-customers">
+    <div class="admin-card"><div class="admin-card-head"><h3>Data Pelanggan</h3></div><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Nama</th><th>WhatsApp</th><th>Jumlah Pesanan</th><th>Total Transaksi</th></tr></thead><tbody id="adminCustomerRows"></tbody></table></div></div>
+   </section>
+   <section class="admin-view" id="admin-reports">
+    <div class="admin-stats"><div class="admin-stat"><span>Nilai Semua Pesanan</span><b id="reportGross">Rp0</b></div><div class="admin-stat"><span>Pendapatan Pesanan Selesai</span><b id="reportDone">Rp0</b></div><div class="admin-stat"><span>Pesanan Dibatalkan</span><b id="reportCancelled">0</b></div><div class="admin-stat"><span>Rata-rata Pesanan</span><b id="reportAverage">Rp0</b></div></div>
+    <div class="admin-card"><div class="admin-card-head"><h3>Rekap Status Pesanan</h3><button class="btn softbtn" onclick="exportAdminCSV()">Unduh CSV</button></div><div id="reportStatus" class="admin-chart"></div></div>
+   </section>
+   <section class="admin-view" id="admin-settings">
+    <div class="admin-card"><div class="admin-card-head"><h3>Pengaturan Akun Admin</h3></div>
+     <form id="adminSettingsForm"><div class="admin-form-grid">
+      <div class="admin-field"><label>Username Baru</label><input id="newAdminUsername" required></div>
+      <div class="admin-field"><label>Password Baru (minimal 8 karakter)</label><input id="newAdminPassword" type="password" minlength="8" placeholder="Isi untuk mengganti password"></div>
+      <div class="admin-field"><label>Nomor WhatsApp Admin</label><input id="newAdminWA" placeholder="628xxxxxxxxxx"></div>
+      <div class="admin-field"><label>Link Instagram</label><input id="newAdminIG" placeholder="https://instagram.com/..."></div>
+     </div><div class="admin-form-actions"><button class="btn primary">Simpan Pengaturan</button></div></form>
+     <div class="admin-notice">Catatan: pengaturan akun pada versi HTML demo disimpan di browser ini. Untuk keamanan sungguhan, akun dan data harus dipindahkan ke backend/database dengan password hash dan session server.</div>
+    </div>
+   </section>
+  </main>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js" onerror="var t=document.createElement('script');t.src='https://unpkg.com/three@0.152.2/build/three.min.js';document.head.appendChild(t);"></script>
+<script>
+const WA='6282164462480', IG='https://www.instagram.com/shadrinna_/';
+const products=[
+{id:1,name:'Kamera DSLR',category:'Kamera',price:75000,image:'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=900&q=80',desc:'Kamera untuk dokumentasi kegiatan, tugas fotografi, dan acara kampus.',model:'camera'},
+{id:2,name:'Tripod Kamera',category:'Aksesori',price:15000,image:'https://images.unsplash.com/photo-1617005082133-548c4dd27f35?auto=format&fit=crop&w=900&q=80',desc:'Tripod untuk membantu pengambilan foto dan video agar lebih stabil.',model:'tripod'},
+{id:3,name:'Proyektor',category:'Elektronik',price:50000,image:'https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=900&q=80',desc:'Proyektor untuk presentasi kelas, rapat, dan kegiatan organisasi.',model:'projector'},
+{id:4,name:'Mikrofon',category:'Audio',price:25000,image:'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=900&q=80',desc:'Mikrofon untuk acara, wawancara, dan kebutuhan rekaman suara.',model:'mic'},
+{id:5,name:'Laptop',category:'Elektronik',price:100000,image:'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=80',desc:'Laptop untuk mengerjakan tugas, presentasi, dan kegiatan produktif.',model:'laptop'},
+{id:6,name:'Ring Light',category:'Aksesori',price:20000,image:'https://images.unsplash.com/photo-1593078166037-9f9e3f2c9b6a?auto=format&fit=crop&w=900&q=80',desc:'Pencahayaan tambahan untuk foto, video, dan pertemuan daring.',model:'ring'},
+{id:7,name:'Speaker Portable',category:'Audio',price:30000,image:'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=900&q=80',desc:'Speaker praktis untuk kegiatan kelompok dan acara kecil.',model:'speaker'},
+{id:8,name:'Webcam',category:'Kamera',price:20000,image:'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=900&q=80',desc:'Webcam untuk kelas daring, rapat, dan perekaman video.',model:'webcam'},
+{id:9,name:'Workstation PC',category:'Laboratorium Komputer',price:0,purchaseRange:'Rp15–50 juta',image:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=900&q=80',desc:'Komputer spesifikasi tinggi untuk simulasi, pemrograman, dan desain. Kisaran harga pengadaan: Rp15–50 juta. Hubungi admin untuk harga sewa.',model:'workstation'},
+{id:10,name:'Server Enterprise',category:'Laboratorium Komputer',price:0,purchaseRange:'Rp30–150 juta',image:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80',desc:'Server untuk menyimpan data dan menjalankan layanan jaringan. Kisaran harga pengadaan: Rp30–150 juta. Hubungi admin untuk harga sewa.',model:'server'},
+{id:11,name:'NAS Storage',category:'Laboratorium Komputer',price:0,purchaseRange:'Rp8–40 juta',image:'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=900&q=80',desc:'Penyimpanan data terpusat yang dapat diakses oleh banyak komputer. Kisaran harga pengadaan: Rp8–40 juta. Hubungi admin untuk harga sewa.',model:'nas'},
+{id:12,name:'Enterprise Router',category:'Laboratorium Jaringan Komputer',price:0,purchaseRange:'Rp5–50 juta',image:'https://images.unsplash.com/photo-1606904825846-647eb07f5be2?auto=format&fit=crop&w=900&q=80',desc:'Untuk praktikum routing, konfigurasi IP, dan manajemen jaringan. Kisaran harga pengadaan: Rp5–50 juta. Hubungi admin untuk harga sewa.',model:'router'},
+{id:13,name:'Managed Switch 48 Port',category:'Laboratorium Jaringan Komputer',price:0,purchaseRange:'Rp5–40 juta',image:'https://images.unsplash.com/photo-1551703599-6b3e8379aa8f?auto=format&fit=crop&w=900&q=80',desc:'Switch terkelola untuk praktikum VLAN, trunking, dan konfigurasi jaringan. Kisaran harga pengadaan: Rp5–40 juta. Hubungi admin untuk harga sewa.',model:'switch'},
+{id:14,name:'Hardware Firewall',category:'Laboratorium Jaringan Komputer',price:0,purchaseRange:'Rp10–80 juta',image:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80',desc:'Perangkat keamanan jaringan untuk praktikum pengaturan akses dan firewall. Kisaran harga pengadaan: Rp10–80 juta. Hubungi admin untuk harga sewa.',model:'firewall'},
+{id:15,name:'Fiber Optic Fusion Splicer',category:'Laboratorium Jaringan Komputer',price:0,purchaseRange:'Rp15–80 juta',image:'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80',desc:'Alat untuk menyambungkan inti kabel fiber optik dengan teknik fusion splicing. Kisaran harga pengadaan: Rp15–80 juta. Hubungi admin untuk harga sewa.',model:'splicer'},
+{id:16,name:'OTDR',category:'Laboratorium Jaringan Komputer',price:0,purchaseRange:'Rp15–100 juta',image:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80',desc:'Optical Time Domain Reflectometer untuk menguji kualitas dan mendeteksi gangguan kabel fiber optik. Kisaran harga pengadaan: Rp15–100 juta. Hubungi admin untuk harga sewa.',model:'otdr'},
+{id:17,name:'Digital Oscilloscope',category:'Laboratorium Elektronika',price:0,purchaseRange:'Rp5–50 juta',image:'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=900&q=80',desc:'Mengamati bentuk gelombang dan sinyal listrik dalam praktikum elektronika. Kisaran harga pengadaan: Rp5–50 juta. Hubungi admin untuk harga sewa.',model:'oscilloscope'},
+{id:18,name:'Spectrum Analyzer',category:'Laboratorium Elektronika',price:0,purchaseRange:'Rp20–150 juta',image:'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',desc:'Menganalisis frekuensi dan spektrum sinyal. Kisaran harga pengadaan: Rp20–150 juta. Hubungi admin untuk harga sewa.',model:'spectrum'},
+{id:19,name:'Function Generator',category:'Laboratorium Elektronika',price:0,purchaseRange:'Rp3–20 juta',image:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80',desc:'Menghasilkan berbagai bentuk sinyal untuk pengujian rangkaian. Kisaran harga pengadaan: Rp3–20 juta. Hubungi admin untuk harga sewa.',model:'functiongen'},
+{id:20,name:'Programmable DC Power Supply',category:'Laboratorium Elektronika',price:0,purchaseRange:'Rp2–20 juta',image:'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',desc:'Menyediakan tegangan dan arus DC yang dapat diatur. Kisaran harga pengadaan: Rp2–20 juta. Hubungi admin untuk harga sewa.',model:'powersupply'},
+{id:21,name:'Vector Network Analyzer (VNA)',category:'Laboratorium Elektronika',price:0,purchaseRange:'Rp15–100 juta',image:'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=900&q=80',desc:'Mengukur karakteristik jaringan dan komponen frekuensi radio. Kisaran harga pengadaan: Rp15–100 juta. Hubungi admin untuk harga sewa.',model:'vna'},
+{id:22,name:'SMT Pick and Place Machine',category:'Laboratorium Elektronika',price:0,purchaseRange:'Rp30–200 juta',image:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80',desc:'Mesin untuk memasang komponen elektronik pada PCB secara otomatis. Kisaran harga pengadaan: Rp30–200 juta. Hubungi admin untuk harga sewa.',model:'pickplace'},
+{id:23,name:'PCB CNC Machine',category:'Alat Mahal Tambahan',price:0,purchaseRange:'Rp20–100 juta',image:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80',desc:'Mesin CNC untuk proses pembuatan dan pemotongan jalur PCB. Kisaran harga pengadaan: Rp20–100 juta. Hubungi admin untuk harga sewa.',model:'cnc'},
+{id:24,name:'Rework Station BGA',category:'Alat Mahal Tambahan',price:0,purchaseRange:'Rp10–50 juta',image:'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',desc:'Stasiun pengerjaan ulang komponen BGA pada papan rangkaian elektronik. Kisaran harga pengadaan: Rp10–50 juta. Hubungi admin untuk harga sewa.',model:'bga'},
+{id:25,name:'Logic Analyzer',category:'Alat Mahal Tambahan',price:0,purchaseRange:'Rp3–30 juta',image:'https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?auto=format&fit=crop&w=900&q=80',desc:'Menganalisis banyak kanal sinyal digital dan memeriksa komunikasi antarperangkat. Kisaran harga pengadaan: Rp3–30 juta. Hubungi admin untuk harga sewa.',model:'logicanalyzer'},
+{id:26,name:'Thermal Camera',category:'Alat Mahal Tambahan',price:0,purchaseRange:'Rp5–50 juta',image:'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=80',desc:'Kamera pencitraan panas untuk memeriksa suhu komponen dan mendeteksi titik panas. Kisaran harga pengadaan: Rp5–50 juta. Hubungi admin untuk harga sewa.',model:'thermal'},
+{id:27,name:'3D Printer Industrial',category:'Alat Mahal Tambahan',price:0,purchaseRange:'Rp20–100 juta',image:'https://images.unsplash.com/photo-1612698093158-e07ac200d44e?auto=format&fit=crop&w=900&q=80',desc:'Printer 3D untuk membuat prototipe dan komponen berdasarkan model digital. Kisaran harga pengadaan: Rp20–100 juta. Hubungi admin untuk harga sewa.',model:'printer'},
+{id:28,name:'Electronic Load Tester',category:'Alat Mahal Tambahan',price:0,purchaseRange:'Rp3–25 juta',image:'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80',desc:'Menguji kemampuan sumber daya dengan beban elektronik yang dapat diatur. Kisaran harga pengadaan: Rp3–25 juta. Hubungi admin untuk harga sewa.',model:'electronicload'}];
+let category='Semua',cart=JSON.parse(localStorage.getItem('pa_cart')||'[]'),history=JSON.parse(localStorage.getItem('pa_history')||'[]');
+const money=n=>'Rp'+Number(n).toLocaleString('id-ID');function toast(t){let e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2200)}
+function renderFilters(){let cats=['Semua',...new Set(products.map(p=>p.category))];document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter ${c===category?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join('')}
+function setCategory(c){category=c;renderFilters();renderProducts()}
+function renderProducts(){let q=document.getElementById('search').value.toLowerCase();let list=products.filter(p=>(category==='Semua'||p.category===category)&&(p.name.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)));document.getElementById('products').innerHTML=list.length?list.map(p=>`<article class="product"><img src="${p.image}" alt="${p.name}" loading="lazy"><div class="product-body"><span class="tag">${p.category}</span><h3>${p.name}</h3><p>Harga sewa per hari</p><div class="price">${p.price>0?`${money(p.price)} <small>/ hari</small>`:'Hubungi admin'} </div>${p.purchaseRange?`<p style="font-size:11px;color:#777;margin:-7px 0 12px">Harga alat: ${p.purchaseRange}</p>`:''}<div class="product-actions"><button class="btn softbtn" onclick="showDetail(${p.id})">Detail</button><button class="btn primary" onclick="addCart(${p.id})">+ Pilih</button></div></div></article>`).join(''):'<div class="empty">Barang tidak ditemukan. Coba kata kunci lain.</div>'}
+function showDetail(id){let p=products.find(x=>x.id===id);document.getElementById('detail').innerHTML=`<img src="${p.image}" alt="${p.name}"><span class="tag">${p.category}</span><h2 style="margin:12px 0 7px;font:700 25px 'Space Grotesk'">${p.name}</h2><p style="color:var(--muted);line-height:1.7">${p.desc}</p><div class="price">${p.price>0?`${money(p.price)} <small>/ hari</small>`:'Hubungi admin'}</div>${p.purchaseRange?`<p style="font-size:12px;color:var(--muted)">Kisaran harga pengadaan: ${p.purchaseRange}</p>`:''}<div style="display:flex;gap:9px;flex-wrap:wrap"><button class="btn primary" onclick="addCart(${p.id});closeModal()">Tambah ke keranjang</button><button class="btn softbtn" onclick="selectModel('${p.model}');document.getElementById('3d').scrollIntoView({behavior:'smooth'});closeModal()">Lihat model 3D</button></div>`;document.getElementById('detailModal').classList.add('show')}
+function closeModal(){document.getElementById('detailModal').classList.remove('show')}
+function saveCart(){localStorage.setItem('pa_cart',JSON.stringify(cart))}
+function addCart(id){let item=cart.find(x=>x.id===id);if(item)item.qty++;else cart.push({id,qty:1});saveCart();renderCart();toast('Barang ditambahkan ke keranjang')}
+function removeCart(id){cart=cart.filter(x=>x.id!==id);saveCart();renderCart()}
+function qty(id,n){let x=cart.find(x=>x.id===id);if(!x)return;x.qty+=n;if(x.qty<1)removeCart(id);else{saveCart();renderCart()}}
+function clearCart(){if(!cart.length)return toast('Keranjang masih kosong');if(confirm('Kosongkan semua barang di keranjang?')){cart=[];saveCart();renderCart()}}
+function cartTotal(){return cart.reduce((s,x)=>s+products.find(p=>p.id===x.id).price*x.qty,0)}
+function renderCart(){let el=document.getElementById('cartItems');el.innerHTML=cart.length?cart.map(x=>{let p=products.find(y=>y.id===x.id);return `<div class="cartline"><div><b>${p.name}</b><small>${p.price>0?money(p.price)+' / hari':'Harga sewa konfirmasi admin'}</small></div><div class="qty"><button onclick="qty(${p.id},-1)">−</button><b>${x.qty}</b><button onclick="qty(${p.id},1)">+</button></div><button class="remove" onclick="removeCart(${p.id})">Hapus</button></div>`}).join(''):'<div class="empty">Keranjangmu masih kosong.<br>Pilih barang dari katalog untuk mulai meminjam.</div>';document.getElementById('itemCount').textContent=cart.reduce((s,x)=>s+x.qty,0);document.getElementById('subtotal').textContent=cart.some(x=>(products.find(p=>p.id===x.id)?.price||0)===0)?'Konfirmasi admin':money(cartTotal());document.getElementById('grand').textContent=cart.some(x=>(products.find(p=>p.id===x.id)?.price||0)===0)?'Konfirmasi admin':money(cartTotal())}
+function checkout(){if(!cart.length)return toast('Pilih barang terlebih dahulu');document.getElementById('checkoutModal').classList.add('show')}
+function closeCheckout(){document.getElementById('checkoutModal').classList.remove('show')}
+document.getElementById('borrowDate').min=new Date().toISOString().slice(0,10);
+document.getElementById('orderForm').addEventListener('submit',e=>{e.preventDefault();let name=document.getElementById('custName').value.trim(),phone=document.getElementById('custPhone').value.trim(),date=document.getElementById('borrowDate').value,days=Number(document.getElementById('borrowDays').value),note=document.getElementById('note').value.trim();if(!name||!phone||!date||days<1)return;let lines=cart.map(x=>{let p=products.find(y=>y.id===x.id);return `• ${p.name} x${x.qty} — ${p.price>0?money(p.price*x.qty)+'/hari':'harga sewa konfirmasi admin'}`});let hasUnpriced=cart.some(x=>(products.find(p=>p.id===x.id)?.price||0)===0);let total=cartTotal()*days;let order={id:Date.now(),name,phone,date,days,total,priceNeedsConfirmation:hasUnpriced,items:lines,itemDetails:cart.map(x=>{let p=products.find(y=>y.id===x.id);return {id:p.id,name:p.name,qty:x.qty,price:p.price,subtotal:p.price*x.qty*days}}),note,status:'pending',created:new Date().toLocaleString('id-ID')};history.unshift(order);localStorage.setItem('pa_history',JSON.stringify(history));let msg=['Halo Admin PinjamAlat, saya ingin mengajukan peminjaman.','',`Nama: ${name}`,`Nomor WhatsApp: ${phone}`,`Tanggal mulai: ${date}`,`Durasi: ${days} hari`,'','Daftar barang:',...lines,'',`Estimasi total: ${hasUnpriced?'Menunggu konfirmasi harga sewa':money(total)}`,`Catatan: ${note||'-'}`,'','Mohon konfirmasi ketersediaan dan ketentuan peminjaman. Terima kasih.'].join('\n');window.open(`https://wa.me/${localStorage.getItem('pa_admin_wa')||WA}?text=${encodeURIComponent(msg)}`,'_blank');cart=[];saveCart();renderCart();renderHistory();closeCheckout();e.target.reset();toast('Ringkasan pesanan dibuka di WhatsApp')});
+function renderHistory(){document.getElementById('history').innerHTML=history.length?history.slice(0,8).map(o=>`<div class="historyitem"><b>Pesanan #${o.id}</b><br><small>${o.created} · ${o.date} · ${o.days} hari</small><p style="font-size:13px;margin:10px 0">${o.items.join('<br>')}</p><b style="color:#6857ed">${o.priceNeedsConfirmation?'Harga dikonfirmasi admin':money(o.total)}</b></div>`).join(''):'<div class="empty">Belum ada riwayat pesanan di browser ini.</div>'}
+renderFilters();renderProducts();renderCart();renderHistory();
+
+// Interactive Three.js product viewer: stylized, draggable 3D models.
+let scene,camera,renderer,root,spin=true,drag=false,lastX=0,lastY=0,zoom=5.2;
+const stage=document.getElementById('stage'),canvas=document.getElementById('threeCanvas');
+function mat(color,metal=0,rough=.45){return new THREE.MeshStandardMaterial({color,metalness:metal,roughness:rough})}
+function box(parent,w,h,d,m,x=0,y=0,z=0,rx=0,ry=0,rz=0){let o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.rotation.set(rx,ry,rz);parent.add(o);return o}
+function cyl(parent,r1,r2,h,m,x=0,y=0,z=0,segments=32){let o=new THREE.Mesh(new THREE.CylinderGeometry(r1,r2,h,segments),m);o.position.set(x,y,z);parent.add(o);return o}
+function torus(parent,r,t,m,x=0,y=0,z=0,rx=0){let o=new THREE.Mesh(new THREE.TorusGeometry(r,t,12,64),m);o.position.set(x,y,z);o.rotation.x=rx;parent.add(o);return o}
+function sphere(parent,r,m,x=0,y=0,z=0){let o=new THREE.Mesh(new THREE.SphereGeometry(r,24,16),m);o.position.set(x,y,z);parent.add(o);return o}
+function buildModel(type){root=new THREE.Group();scene.add(root);let dark=mat(0x20263b,.65),black=mat(0x111827,.35),silver=mat(0xb8c3d5,.75),glass=mat(0x293b62,.7,.15),purple=mat(0x8877ff,.35),pink=mat(0xff78b5,.25),rubber=mat(0x34394b);
+if(type==='camera'||type==='webcam'){box(root,1.65,.95,.72,dark,0,0,0);box(root,.85,.18,.76,black,0,.56,0);cyl(root,.48,.48,.35,black,0,0,.48,48);cyl(root,.34,.34,.37,glass,0,0,.69,48);cyl(root,.22,.22,.39,purple,0,0,.73,48);sphere(root,.09,mat(0x9deaff,.6,.1),-.47,.2,.37);box(root,.25,.12,.16,silver,.5,.42,.18);if(type==='webcam'){box(root,.5,.12,.18,black,0,-.58,0);box(root,.14,.35,.13,silver,0,-.78,0)}}
+if(type==='laptop'){box(root,1.9,.12,1.25,silver,0,-.45,0);box(root,1.78,1.1,.09,dark,0,.12,-.57,-.08);box(root,1.57,.88,.025,glass,0,.14,-.51,-.08);box(root,.42,.018,.25,mat(0x7e8ab5),0,-.37,.05)}
+if(type==='projector'){box(root,1.7,.65,1.25,mat(0xe8eaf2,.25),0,0,0);cyl(root,.37,.37,.18,black,0,.02,.67,48);cyl(root,.28,.28,.2,glass,0,.02,.76,48);box(root,.35,.08,.22,dark,-.52,-.37,.35);for(let i=-2;i<=2;i++)box(root,.06,.22,.04,rubber,i*.2,-.05,-.65)}
+if(type==='mic'){cyl(root,.24,.28,1.35,dark,0,.05,0,40);cyl(root,.26,.26,.42,silver,0,.78,0,40);sphere(root,.25,black,0,.98,0);for(let i=0;i<5;i++)torus(root,.2,.018,silver,0,.85+i*.045,0,Math.PI/2);cyl(root,.1,.1,.45,black,0,-.83,0)}
+if(type==='speaker'){box(root,1.15,1.65,.72,dark);cyl(root,.37,.37,.12,black,0,.35,.4);cyl(root,.29,.29,.13,silver,0,.35,.48);cyl(root,.19,.19,.14,black,0,.35,.55);cyl(root,.19,.19,.12,black,0,-.35,.4);cyl(root,.11,.11,.13,purple,0,-.35,.48);box(root,.24,.07,.03,pink,0,.68,.38)}
+if(type==='tripod'){cyl(root,.12,.12,1.35,silver,0,.15,0);cyl(root,.2,.2,.16,dark,0,.85,0);for(let a=0;a<3;a++){let ang=a*Math.PI*2/3;let leg=box(root,.11,1.55,.12,silver,Math.sin(ang)*.5,-.48,Math.cos(ang)*.5,0,0,-Math.sin(ang)*.45);leg.rotation.z=-Math.sin(ang)*.45;leg.rotation.x=Math.cos(ang)*.45}box(root,.65,.12,.45,black,0,1.0,0);cyl(root,.12,.12,.25,purple,0,1.2,0)}
+if(type==='ring'){cyl(root,.08,.08,1.65,silver,0,-.05,0);for(let a=0;a<3;a++){let ang=a*Math.PI*2/3;let leg=box(root,.09,1.2,.09,silver,Math.sin(ang)*.43,-.78,Math.cos(ang)*.43);leg.rotation.z=-Math.sin(ang)*.5;leg.rotation.x=Math.cos(ang)*.5}torus(root,.83,.11,mat(0xffd4ec,.2),0,1.05,0,Math.PI/2);torus(root,.68,.045,mat(0xffffff,.1),0,1.05,.02,Math.PI/2);cyl(root,.12,.12,.22,black,0,1.05,0)}
+if(type==='workstation'){box(root,1.25,1.65,.9,dark,0,0,0);box(root,1.12,.12,.78,black,0,-.82,0);for(let i=0;i<3;i++){box(root,.09,.09,.04,purple,-.35+i*.3,.45,.47)}for(let i=0;i<5;i++)box(root,.035,.55,.035,silver,-.45+i*.22,-.05,.47);box(root,1.25,.09,.9,silver,0,.88,0)}
+if(type==='server'||type==='nas'||type==='firewall'){let h=type==='server'?2.15:1.25;box(root,1.45,h,.85,dark);for(let i=0;i<(type==='server'?5:3);i++){let y=-h/2+.22+i*(h-.42)/(type==='server'?4:2);box(root,1.18,.27,.045,black,0,y,.45);for(let j=0;j<4;j++)box(root,.07,.12,.035,j%2?purple:silver,-.45+j*.22,y,.49);for(let j=0;j<3;j++)cyl(root,.035,.035,.035,pink,.35+j*.13,y,.5,16)}}
+if(type==='router'||type==='switch'){box(root,2.05,.38,.9,dark);box(root,1.95,.08,.82,silver,0,-.2,0);for(let i=0;i<(type==='switch'?24:6);i++){let x=-.9+(i%12)*.16;let y=i<12?.02:-.08;box(root,.09,.12,.04,black,x,y,.47);box(root,.035,.035,.02,pink,x,y+.06,.5)}for(let i=0;i<2;i++)cyl(root,.035,.035,.55,silver,-.75+i*1.5,.4,-.2,16)}
+if(type==='splicer'){box(root,1.45,.32,.95,dark,0,-.2,0);box(root,1.15,.65,.08,black,0,.25,-.25,-.25);box(root,.8,.38,.035,glass,0,.28,-.19,-.25);box(root,.45,.08,.4,silver,0,.35,.32);cyl(root,.08,.08,.25,purple,-.48,-.34,.35,24);cyl(root,.08,.08,.25,purple,.48,-.34,.35,24)}
+if(type==='otdr'){box(root,1.15,1.45,.28,dark,0,0,0);box(root,.9,.68,.035,glass,0,.25,.16);box(root,.45,.08,.025,purple,0,-.3,.17);for(let i=0;i<4;i++)box(root,.12,.08,.04,silver,-.3+i*.2,-.53,.17);cyl(root,.07,.07,.08,pink,-.42,-.72,.17,20)}
+if(type==='oscilloscope'||type==='spectrum'||type==='functiongen'||type==='powersupply'||type==='vna'||type==='electronicload'||type==='logicanalyzer'){box(root,1.75,1.2,.72,dark,0,0,0);box(root,1.05,.7,.035,glass,-.28,.18,.38);box(root,.82,.035,.025,purple,-.28,.18,.41);for(let i=0;i<5;i++)box(root,.13,.05,.025,i%2?pink:silver,-.6+i*.16,.43,.42);for(let i=0;i<3;i++)cyl(root,.11,.11,.07,silver,.55,.34-i*.28,.4,24);for(let i=0;i<4;i++)cyl(root,.055,.055,.05,pink,.35+i*.17,-.43,.4,16);box(root,1.8,.08,.75,silver,0,-.64,0)}
+if(type==='pickplace'){box(root,2.1,.18,1.35,silver,0,-.65,0);box(root,1.8,.12,1.05,dark,0,-.48,0);box(root,.14,1.35,.14,silver,-.72,.2,0);box(root,.14,1.35,.14,silver,.72,.2,0);box(root,1.6,.12,.14,dark,0,.82,0);box(root,.18,.75,.18,purple,.25,.35,0);cyl(root,.08,.08,.5,silver,.25,-.2,0,20);box(root,.55,.06,.4,black,0,-.3,.35)}
+if(type==='cnc'){box(root,1.8,.18,1.5,dark,0,-.65,0);for(let x of [-.78,.78])box(root,.12,1.5,.12,silver,x,.1,0);box(root,1.65,.12,.15,silver,0,.83,0);box(root,.35,.55,.35,purple,0,.48,0);cyl(root,.08,.08,.48,black,0,.05,0,24);box(root,1.25,.06,.85,mat(0x6b7892,.3),0,-.52,0)}
+if(type==='bga'){box(root,1.5,.4,1.05,dark,0,-.35,0);box(root,.85,.75,.55,black,0,.25,0);box(root,.6,.08,.4,glass,0,.62,0);cyl(root,.12,.12,.5,silver,-.52,.28,0,24);cyl(root,.12,.12,.5,silver,.52,.28,0,24);box(root,.6,.1,.6,purple,0,-.08,.62)}
+if(type==='thermal'){box(root,1.15,.85,.55,dark,0,0,0);box(root,.68,.5,.035,glass,0,.05,.3);cyl(root,.2,.2,.22,black,0,-.1,.48,32);cyl(root,.13,.13,.24,pink,0,-.1,.58,32);box(root,.35,.1,.25,silver,0,-.5,0)}
+if(type==='printer'){box(root,1.8,1.9,1.35,dark,0,0,0);box(root,1.35,1.25,.05,glass,0,.05,.7);box(root,1.1,.08,.85,silver,0,-.7,.05);for(let x of [-.5,.5])box(root,.08,1.35,.08,silver,x,.08,.35);box(root,.25,.18,.25,purple,0,.25,.2);box(root,.55,.08,.45,pink,0,-.58,.1)}
+
+root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}})}
+function init3D(){if(!window.THREE){stage.innerHTML='<p style="color:white;padding:25px;text-align:center">Model 3D perlu koneksi internet untuk dimuat.</p>';return}scene=new THREE.Scene();camera=new THREE.PerspectiveCamera(38,1,.1,100);camera.position.set(3.7,2.6,zoom);camera.lookAt(0,0,0);renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;scene.add(new THREE.HemisphereLight(0xffffff,0x37385d,2));let light=new THREE.DirectionalLight(0xffffff,2.2);light.position.set(4,6,5);light.castShadow=true;scene.add(light);let fill=new THREE.PointLight(0x927cff,1.8);fill.position.set(-4,1,2);scene.add(fill);let floor=new THREE.Mesh(new THREE.CircleGeometry(2.3,64),new THREE.MeshStandardMaterial({color:0x454a78,roughness:.8,transparent:true,opacity:.4}));floor.rotation.x=-Math.PI/2;floor.position.y=-1.5;scene.add(floor);let grid=new THREE.GridHelper(5,18,0x7772b6,0x464b79);grid.position.y=-1.49;grid.material.transparent=true;grid.material.opacity=.22;scene.add(grid);buildModel('camera');resize3D();animate3D()}
+function resize3D(){if(!renderer)return;let w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+function animate3D(){requestAnimationFrame(animate3D);if(root&&spin&&!drag)root.rotation.y+=.006;renderer.render(scene,camera)}
+function selectModel(key){if(!scene)return;let p=products.find(x=>x.model===key)||products[0];if(!p)return;document.getElementById('modelSelect').value=p.model;document.getElementById('modelName').textContent=p.name;scene.remove(root);buildModel(p.model)}
+function reset3D(){if(root){root.rotation.set(0,0,0);camera.position.set(3.7,2.6,5.2);camera.lookAt(0,0,0)}}
+function toggleSpin(){spin=!spin;document.getElementById('spinBtn').textContent=spin?'Ⅱ Pause':'▶ Putar'}
+function zoom3D(f){camera.position.multiplyScalar(1/f);camera.position.clampLength(3,10)}
+stage.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;lastY=e.clientY;stage.setPointerCapture(e.pointerId)});
+stage.addEventListener('pointermove',e=>{if(!drag||!root)return;root.rotation.y+=(e.clientX-lastX)*.012;root.rotation.x+=(e.clientY-lastY)*.009;lastX=e.clientX;lastY=e.clientY});
+stage.addEventListener('pointerup',()=>drag=false);stage.addEventListener('pointercancel',()=>drag=false);
+stage.addEventListener('wheel',e=>{e.preventDefault();zoom3D(e.deltaY>0?.92:1.08)},{passive:false});
+document.getElementById('modelSelect').innerHTML=products.map(p=>`<option value="${p.model}">${p.name}</option>`).join('');
+function boot3D(){if(window.THREE){init3D();window.addEventListener('resize',resize3D);return true}return false}
+if(!boot3D()){let attempts=0;const wait3D=setInterval(()=>{attempts++;if(boot3D()||attempts>50){clearInterval(wait3D);if(!window.THREE)stage.innerHTML='<p style="color:white;padding:24px;text-align:center">Model 3D membutuhkan koneksi internet. Coba buka kembali halaman atau gunakan jaringan lain.</p>'}},100)}
+</script>
+
+<script>
+/* PinjamAlat Admin - penyimpanan lokal untuk prototipe */
+(function(){
+ const $=id=>document.getElementById(id);
+ const defaultAdmin={username:'admin',password:'PinjamAlat2026!'};
+ function getAdmin(){return JSON.parse(localStorage.getItem('pa_admin')||'null')||defaultAdmin}
+ function saveProducts(){localStorage.setItem('pa_products',JSON.stringify(products))}
+ function saveHistory(){localStorage.setItem('pa_history',JSON.stringify(history))}
+ function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+ const statuses={pending:'Menunggu konfirmasi',confirmed:'Dikonfirmasi',ongoing:'Sedang disewa',completed:'Selesai',cancelled:'Dibatalkan'};
+ // Load previously managed product catalogue, retaining the original catalogue as first-run data.
+ try{const saved=JSON.parse(localStorage.getItem('pa_products')||'null');if(Array.isArray(saved)&&saved.length){const defaults=products.slice();const merged=defaults.map(d=>saved.find(x=>String(x.id)===String(d.id))||d);saved.forEach(x=>{if(!defaults.some(d=>String(d.id)===String(x.id)))merged.push(x)});products.splice(0,products.length,...merged)}}catch(e){}
+ products.forEach(p=>{if(p.stock===undefined)p.stock=5;if(!p.condition)p.condition='Baik'});
+ window.openAdminLogin=()=>{$('adminLogin').classList.add('show');$('adminLoginError').style.display='none';$('adminUsername').focus()};
+ window.closeAdminLogin=()=>{$('adminLogin').classList.remove('show')};
+ window.closeAdminPanel=()=>{$('adminPanel').classList.remove('show');document.body.style.overflow=''};
+ window.adminLogout=()=>{sessionStorage.removeItem('pa_admin_auth');closeAdminPanel();openAdminLogin()};
+ $('adminLoginForm').addEventListener('submit',e=>{
+  e.preventDefault();const a=getAdmin();
+  if($('adminUsername').value.trim()===a.username&&$('adminPassword').value===a.password){
+   sessionStorage.setItem('pa_admin_auth','1');closeAdminLogin();$('adminPanel').classList.add('show');document.body.style.overflow='hidden';$('adminUserLabel').textContent=a.username;refreshAdmin();
+  }else{$('adminLoginError').style.display='block'}
+ });
+ window.adminView=(name,btn)=>{
+  document.querySelectorAll('.admin-view').forEach(x=>x.classList.remove('active'));
+  $('admin-'+name).classList.add('active');
+  document.querySelectorAll('.admin-nav button').forEach(x=>x.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const titles={overview:'Dashboard',products:'Manajemen Barang',orders:'Manajemen Pesanan',customers:'Data Pelanggan',reports:'Laporan Penyewaan',settings:'Pengaturan'};
+  $('adminPageTitle').textContent=titles[name];refreshAdmin();
+ };
+ function pill(status){return `<span class="admin-pill ${safe(status)}">${statuses[status]||safe(status||'pending')}</span>`}
+ function itemNames(o){return (o.itemDetails||[]).map(i=>`${i.name} x${i.qty}`).join(', ')||((o.items||[]).join(' ')||'-')}
+ function refreshAdmin(){
+  $('adminUserLabel').textContent=getAdmin().username;
+  $('statProducts').textContent=products.length;
+  $('statOrders').textContent=history.length;
+  $('statPending').textContent=history.filter(o=>(o.status||'pending')==='pending').length;
+  $('statRevenue').textContent=money(history.filter(o=>o.status==='completed').reduce((s,o)=>s+Number(o.total||0),0));
+  $('overviewOrders').innerHTML=history.length?`<div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>Pesanan</th><th>Pelanggan</th><th>Total</th><th>Status</th></tr></thead><tbody>${history.slice(0,5).map(o=>`<tr><td>#${o.id}</td><td>${safe(o.name)}</td><td>${o.priceNeedsConfirmation?'Konfirmasi':money(o.total||0)}</td><td>${pill(o.status||'pending')}</td></tr>`).join('')}</tbody></table></div>`:'<div class="admin-empty">Belum ada pesanan masuk.</div>';
+  $('stockSummary').innerHTML=products.slice(0,8).map(p=>`<div class="admin-bar-row"><span>${safe(p.name)}</span><div class="admin-bar"><i style="width:${Math.min(100,Math.max(0,Number(p.stock??5)*10))}%"></i></div><b>${p.stock??'—'} unit</b></div>`).join('')||'<div class="admin-empty">Belum ada barang.</div>';
+  renderAdminProducts();renderAdminOrders();renderCustomers();renderReports();
+  const a=getAdmin();$('newAdminUsername').value=a.username;$('newAdminWA').value=localStorage.getItem('pa_admin_wa')||'6282164462480';$('newAdminIG').value=localStorage.getItem('pa_admin_ig')||'https://www.instagram.com/shadrinna_/';
+ }
+ window.renderAdminProducts=()=>{
+  $('adminProductRows').innerHTML=products.length?products.map(p=>`<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="${safe(p.image)}" onerror="this.style.display='none'"><b>${safe(p.name)}</b></div></td><td>${safe(p.category)}</td><td>${p.price>0?money(p.price):'Konfirmasi'}</td><td>${safe(p.purchaseRange||'-')}</td><td>${p.stock??5}</td><td>${safe(p.condition||'Baik')}</td><td><div class="admin-actions"><button onclick="editProduct(${p.id})">Edit</button><button class="danger" onclick="deleteProduct(${p.id})">Hapus</button></div></td></tr>`).join(''):'<tr><td colspan="7" class="admin-empty">Belum ada barang.</td></tr>';
+ };
+ window.showProductForm=(p=null)=>{
+  $('productEditor').style.display='block';$('productEditorTitle').textContent=p?'Edit Barang':'Tambah Barang';$('editProductId').value=p?.id||'';
+  $('pName').value=p?.name||'';$('pCategory').value=p?.category||'';$('pPrice').value=p?.price??'';$('pPurchaseRange').value=p?.purchaseRange||'';$('pStock').value=p?.stock??1;$('pCondition').value=p?.condition||'Baik';$('pImage').value=p?.image||'';$('pDesc').value=p?.desc||'';
+  $('productEditor').scrollIntoView({behavior:'smooth',block:'center'});
+ };
+ window.hideProductForm=()=>{$('productEditor').style.display='none';$('adminProductForm').reset()};
+ window.editProduct=id=>showProductForm(products.find(p=>p.id===id));
+ $('adminProductForm').addEventListener('submit',e=>{
+  e.preventDefault();const id=$('editProductId').value?Number($('editProductId').value):Date.now();
+  const prev=products.find(p=>p.id===id);
+  const obj={id,name:$('pName').value.trim(),category:$('pCategory').value.trim(),price:Number($('pPrice').value),purchaseRange:$('pPurchaseRange').value.trim(),stock:Number($('pStock').value),condition:$('pCondition').value,image:$('pImage').value.trim()||'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80',desc:$('pDesc').value.trim(),model:prev?.model||'camera'};
+  if(prev)Object.assign(prev,obj);else products.push(obj);
+  saveProducts();hideProductForm();renderFilters();renderProducts();$('modelSelect').innerHTML=products.map(p=>`<option value="${p.model}">${safe(p.name)}</option>`).join('');refreshAdmin();toast('Data barang berhasil disimpan');
+ });
+ window.deleteProduct=id=>{
+  const p=products.find(x=>x.id===id);if(!p||!confirm(`Hapus barang "${p.name}" dari katalog?`))return;
+  const idx=products.findIndex(x=>x.id===id);products.splice(idx,1);cart=cart.filter(x=>x.id!==id);saveProducts();saveCart();renderFilters();renderProducts();renderCart();$('modelSelect').innerHTML=products.map(p=>`<option value="${p.model}">${safe(p.name)}</option>`).join('');refreshAdmin();toast('Barang berhasil dihapus');
+ };
+ window.renderAdminOrders=()=>{
+  const q=($('orderSearch')?.value||'').toLowerCase();
+  const list=history.filter(o=>`${o.id} ${o.name} ${o.phone}`.toLowerCase().includes(q));
+  $('adminOrderRows').innerHTML=list.length?list.map(o=>`<tr><td>#${o.id}</td><td><b>${safe(o.name)}</b><br><small>${safe(o.phone)}</small></td><td>${safe(o.date||'-')}<br><small>${safe(o.days||1)} hari</small></td><td>${safe(itemNames(o))}</td><td>${o.priceNeedsConfirmation?'Konfirmasi':money(o.total||0)}</td><td>${pill(o.status||'pending')}</td><td><select aria-label="Status pesanan" onchange="changeOrderStatus(${o.id},this.value)">${Object.entries(statuses).map(([v,l])=>`<option value="${v}" ${(o.status||'pending')===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`).join(''):'<tr><td colspan="7" class="admin-empty">Pesanan tidak ditemukan.</td></tr>';
+ };
+ window.changeOrderStatus=(id,status)=>{
+  const o=history.find(x=>String(x.id)===String(id));if(!o)return;
+  o.status=status;saveHistory();refreshAdmin();renderHistory();toast('Status pesanan diperbarui');
+ };
+ function renderCustomers(){
+  const map={};history.forEach(o=>{const key=o.phone||o.name;if(!map[key])map[key]={name:o.name,phone:o.phone,count:0,total:0};map[key].count++;map[key].total+=Number(o.total||0)});
+  $('adminCustomerRows').innerHTML=Object.values(map).map(c=>`<tr><td>${safe(c.name)}</td><td>${safe(c.phone)}</td><td>${c.count}</td><td>${money(c.total)}</td></tr>`).join('')||'<tr><td colspan="4" class="admin-empty">Belum ada data pelanggan.</td></tr>';
+ }
+ function renderReports(){
+  const gross=history.reduce((s,o)=>s+Number(o.total||0),0),done=history.filter(o=>o.status==='completed').reduce((s,o)=>s+Number(o.total||0),0);
+  $('reportGross').textContent=money(gross);$('reportDone').textContent=money(done);$('reportCancelled').textContent=history.filter(o=>o.status==='cancelled').length;$('reportAverage').textContent=money(history.length?gross/history.length:0);
+  $('reportStatus').innerHTML=Object.entries(statuses).map(([k,v])=>{const n=history.filter(o=>(o.status||'pending')===k).length;const pct=history.length?n/history.length*100:0;return `<div class="admin-bar-row"><span>${v}</span><div class="admin-bar"><i style="width:${pct}%"></i></div><b>${n} pesanan</b></div>`}).join('');
+ }
+ window.exportAdminCSV=()=>{
+  const rows=[['ID','Nama','WhatsApp','Tanggal mulai','Durasi hari','Total','Status','Barang'],...history.map(o=>[o.id,o.name,o.phone,o.date,o.days,o.total,statuses[o.status||'pending'],itemNames(o)])];
+  const csv=rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download='laporan-pinjamalat.csv';a.click();URL.revokeObjectURL(a.href);
+ };
+ $('adminSettingsForm').addEventListener('submit',e=>{
+  e.preventDefault();const username=$('newAdminUsername').value.trim(),password=$('newAdminPassword').value;
+  if(!username)return toast('Username wajib diisi');
+  const a=getAdmin();a.username=username;if(password){if(password.length<8)return toast('Password minimal 8 karakter');a.password=password}
+  localStorage.setItem('pa_admin',JSON.stringify(a));localStorage.setItem('pa_admin_wa',$('newAdminWA').value.trim());localStorage.setItem('pa_admin_ig',$('newAdminIG').value.trim());
+  const wa=localStorage.getItem('pa_admin_wa')||'6282164462480',ig=localStorage.getItem('pa_admin_ig')||'https://www.instagram.com/shadrinna_/';
+  document.querySelectorAll('a[href*="wa.me/"]').forEach(a=>a.href='https://wa.me/'+wa);
+  document.querySelectorAll('a[href*="instagram.com/"]').forEach(a=>a.href=ig);
+  $('newAdminPassword').value='';$('adminUserLabel').textContent=username;toast('Pengaturan admin berhasil disimpan');
+ });
+ // Expose refresh for use after customer checkout and first paint.
+ window.refreshPinjamAlatAdmin=refreshAdmin;$('modelSelect').innerHTML=products.map(p=>`<option value="${p.model}">${safe(p.name)}</option>`).join('');renderFilters();renderProducts();renderCart();renderHistory();
+})();
+</script>
+
+</body></html>
